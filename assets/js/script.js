@@ -14,11 +14,12 @@ const cargarTiposMonedas = async () => {
   if (!indicadores) {
     return;
   }
-  Object.keys(indicadores)
-    .slice(3)
-    .forEach((indicador) => {
-        tipoMoneda.innerHTML += `<option value="${indicador}">${indicador}</option>`;
-    });
+
+  Object.values(indicadores)
+  .slice(3)
+  .forEach((indicador) => {
+      tipoMoneda.innerHTML += `<option value="${indicador.codigo}">${indicador.nombre}</option>`;
+  });
   
 };
 
