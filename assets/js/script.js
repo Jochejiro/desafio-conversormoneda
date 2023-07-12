@@ -34,6 +34,7 @@ const obtenerValorTipoMoneda = async (tipoMoneda) => {
 
 };
 
+// FUNCION QUE GENERA EL GRAFICO Y LO MUESTRA EN EL DOM
 const renderizarGraficaIndicador = async () => {
   const dataTipoMoneda = await obtenerUltimosPorIndicador(tipoMoneda.value);
 
@@ -63,14 +64,30 @@ const renderizarGraficaIndicador = async () => {
  
 };
 
+// FUNCION QUE VALIDA EL INPUT
+function validarInput(input) {
+  let valor = parseFloat(input.value);
+
+  if (Number.isInteger(valor) && valor > 0) {
+    input.style.animation = "";
+    return true;
+
+  } else { 
+    input.style.animation = "shake-horizontal 0.8s ease-out";
+    return false;
+
+  }
+}
+
 // EVENTO QUE AL HACER CLICK EN EL INPUT REMUEVE EL ERROR
 montoClp.addEventListener('click', () => {
   montoClp.classList.remove('is-invalid');
+  montoClp.style.animation = "";
 });
 
 // EVENTO QUE REALIZA LA CONVERSION AL PRESIONAR EL BOTON CONVERTIR
 btnConvertir.addEventListener('click', async () => {
-  if (montoClp.value !== '' && montoClp.value > 0) {
+  if (validarInput(montoClp)) {
     const valorTipoMoneda = await obtenerValorTipoMoneda(tipoMoneda.value);
 
     if (valorTipoMoneda != "false") {
